@@ -1,7 +1,11 @@
+@layer theme, base, clerk, components, utilities;
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+
+@layer theme, base, clerk, components, utilities;
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -41,8 +45,8 @@
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
+    --background: oklch(25.013% 0.02641 284.325);
+    --foreground: oklch(100% 0.00011 271.152);
     --card: oklch(0.205 0 0);
     --card-foreground: oklch(0.985 0 0);
     --popover: oklch(0.205 0 0);
@@ -126,4 +130,24 @@
   html {
     @apply font-sans;
     }
+}
+
+@layer utilities {
+  .gradient {
+    @apply bg-gradient-to-br from-gray-500 via-gray-200 to-white;
+  }
+
+  .gradient-title {
+    @apply bg-gradient-to-br from-gray-500 via-gray-200 to-white text-transparent bg-clip-text;
+  }
+}
+
+.wmde-markdown ul {
+  list-style-type: disc;
+  padding-left: 25px;
+  color: white;
+}
+
+.wmde-markdown {
+  background-color: transparent !important;
 }
