@@ -27,15 +27,23 @@ const ApplicationCard = ({ application, isCandidate = false }) => {
 	};
 
 	const { loading: loadingHiringStatus, fn: fnHiringStatus } = useFetch(
-		updateApplicationStatus,
-		{
-			job_id: application.job_id,
-		},
+		updateApplicationStatus, {}
+		// {
+		// 	job_id: application.job_id,
+		// },
 	);
 
-	const handleStatusChange = (status) => {
-		fnHiringStatus(status).then(() => fnHiringStatus());
-	};
+	// const handleStatusChange = (status) => {
+	// 	fnHiringStatus(status).then(() => fnHiringStatus());
+	// };
+
+	// Update only this specific applicant
+const handleStatusChange = (status) => {
+	fnHiringStatus({
+		application_id: application.id,
+		status, // pass status INSIDE object
+	});
+};
 
 	return (
 		<Card>
@@ -93,6 +101,6 @@ const ApplicationCard = ({ application, isCandidate = false }) => {
 			</CardFooter>
 		</Card>
 	);
-};
+};;
 
 export default ApplicationCard;

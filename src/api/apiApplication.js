@@ -34,15 +34,35 @@ export async function applyToJob(token, _, jobData) {
 }
 
 // - Edit Application Status ( recruiter )
-export async function updateApplicationStatus(token, { job_id }, status) {
+// export async function updateApplicationStatus(token, { job_id }, status) {
+//   const supabase = await supabaseClient(token);
+//   const { data, error } = await supabase
+//     .from("applications")
+//     .update({ status })
+//     .eq("job_id", job_id)
+//     .select();
+
+//   if (error || data.length === 0) {
+//     console.error("Error Updating Application Status:", error);
+//     return null;
+//   }
+
+//   return data;
+// }
+
+// Update ONLY a single application's status (recruiter action)
+export async function updateApplicationStatus(token, _, updateData) {
   const supabase = await supabaseClient(token);
+
+  const { application_id, status } = updateData;
+
   const { data, error } = await supabase
     .from("applications")
     .update({ status })
-    .eq("job_id", job_id)
+    .eq("id", application_id)
     .select();
 
-  if (error || data.length === 0) {
+  if (error) {
     console.error("Error Updating Application Status:", error);
     return null;
   }
